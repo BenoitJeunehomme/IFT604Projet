@@ -4,44 +4,77 @@
 }
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 <script type="text/javascript">
+    var map;
+    var center = new google.maps.LatLng(45.380291, -71.926995);
+
+    function RegionControl(controlDiv, map) {
+        controlDiv.style.padding = '5px';
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = 'red';
+        controlUI.style.border = '1px solid';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Set map to event region';
+        controlDiv.appendChild(controlUI);
+        var controlText = document.createElement('div');
+        controlText.style.fontFamily = 'Arial,sans-serif';
+        controlText.style.fontSize = '12px';
+        controlText.style.paddingLeft = '4px';
+        controlText.style.paddingRight = '4px';
+        controlText.innerHTML = '<b>Event<b>'
+        controlUI.appendChild(controlText);
+
+        google.maps.event.addDomListener(controlUI, 'click', function () {
+            map.setCenter(center);
+        })
+    }
+
     function initialize() {
         var mapProp = {
-            center: new google.maps.LatLng(45.380291, -71.926995),
+            center: center,
             zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            streetViewControl:false
+            
         };
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
         var marker1 = new google.maps.Marker({
-            position: new google.maps.LatLng(45.380291, -71.926995)
+            position: new google.maps.LatLng(45.380291, -71.926995),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
         });
 
         var marker2 = new google.maps.Marker({
-            position: new google.maps.LatLng(45.381370, -71.926730)
+            position: new google.maps.LatLng(45.381370, -71.926730),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+            animation:google.maps.Animation.BOUNCE
         });
 
         var marker3 = new google.maps.Marker({
-            position: new google.maps.LatLng(45.381295, -71.925389)
+            position: new google.maps.LatLng(45.381295, -71.925389),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+            animation: google.maps.Animation.BOUNCE
         });
 
         var region = new google.maps.Circle({
-            center: new google.maps.LatLng(45.379288, -71.927787),
+            center: center,
             radius: 500,
-            strokeColor: "#FF0000",
+            strokeColor: "red",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "red",
             fillOpacity: 0.1
         });
 
         var info1 = new google.maps.InfoWindow({
-            content: "Bomb 1 is at these coordinates : <br>" + 45.380291 + ", " + -71.926995
+            content: "Bomb 1 <br> Coordinates : " + 45.380291 + ", " + -71.926995 + "<br> Status : Defused"
         });
         var info2 = new google.maps.InfoWindow({
-            content: "Bomb 2 is at these coordinates : <br>" + 45.381370 + ", " + -71.926730
+            content: "Bomb 2 <br> Coordinates : " + 45.381370 + ", " + -71.926730 + "<br> Status : Armed"
         });
         var info3 = new google.maps.InfoWindow({
-            content: "Bomb 3 is at these coordinates : <br>" + 45.381295 + ", " + -71.925389
+            content: "Bomb 3 <br> Coordinates : " + 45.381295 + ", " + -71.925389 + "<br> Status : Armed"
         });
 
         marker1.setMap(map);
@@ -60,13 +93,21 @@
         google.maps.event.addListener(marker3, 'click', function () {
             info3.open(map, marker3);
         });
+
+        var regionControlDiv = document.createElement('div');
+        var regionControl = new RegionControl(regionControlDiv, map);
+
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(regionControlDiv)
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
-<h2>EventMap</h2>
+<div class="jumbotron">
+<h1>Event Map</h1>
+<p class="lead">Évènement en cours.</p>
+</div>
 
-<div id="googleMap" style="width:500px;height:380px">
+<div id="googleMap" style="height:850px">
 
 </div>
 
