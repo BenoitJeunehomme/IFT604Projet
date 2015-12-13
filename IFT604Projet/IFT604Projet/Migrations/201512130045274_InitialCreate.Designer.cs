@@ -7,13 +7,13 @@ namespace IFT604Projet.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RemoveAvatarFromProfile : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveAvatarFromProfile));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512130031418_RemoveAvatarFromProfile"; }
+            get { return "201512130045274_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

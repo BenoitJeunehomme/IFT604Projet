@@ -181,23 +181,25 @@
     <Compile Include="Controllers\EventMapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512130011161_InitialCreate.cs" />
-    <Compile Include="Migrations\201512130011161_InitialCreate.Designer.cs">
-      <DependentUpon>201512130011161_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201512130045274_InitialCreate.cs" />
+    <Compile Include="Migrations\201512130045274_InitialCreate.Designer.cs">
+      <DependentUpon>201512130045274_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512130031418_RemoveAvatarFromProfile.cs" />
-    <Compile Include="Migrations\201512130031418_RemoveAvatarFromProfile.Designer.cs">
-      <DependentUpon>201512130031418_RemoveAvatarFromProfile.cs</DependentUpon>
+    <Compile Include="Migrations\201512130236543_AddedProjectFieldsToUserProfiles.cs" />
+    <Compile Include="Migrations\201512130236543_AddedProjectFieldsToUserProfiles.Designer.cs">
+      <DependentUpon>201512130236543_AddedProjectFieldsToUserProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512130317373_AddedAvatars.cs" />
+    <Compile Include="Migrations\201512130317373_AddedAvatars.Designer.cs">
+      <DependentUpon>201512130317373_AddedAvatars.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -256,11 +258,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Profiles\Create.cshtml" />
-    <Content Include="Views\Profiles\Delete.cshtml" />
-    <Content Include="Views\Profiles\Details.cshtml" />
-    <Content Include="Views\Profiles\Edit.cshtml" />
-    <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\EventMap\EventMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -275,11 +272,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512130011161_InitialCreate.resx">
-      <DependentUpon>201512130011161_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512130045274_InitialCreate.resx">
+      <DependentUpon>201512130045274_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512130031418_RemoveAvatarFromProfile.resx">
-      <DependentUpon>201512130031418_RemoveAvatarFromProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512130236543_AddedProjectFieldsToUserProfiles.resx">
+      <DependentUpon>201512130236543_AddedProjectFieldsToUserProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512130317373_AddedAvatars.resx">
+      <DependentUpon>201512130317373_AddedAvatars.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

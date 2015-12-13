@@ -54,10 +54,7 @@ namespace IFT604Projet
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
                 RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
             };
 
             // Configure user lockout defaults
@@ -106,4 +103,5 @@ namespace IFT604Projet
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
 }

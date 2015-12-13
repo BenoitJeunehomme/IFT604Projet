@@ -3,16 +3,16 @@ namespace IFT604Projet.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RemoveAvatarFromProfile : DbMigration
+    public partial class AddedAvatars : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.Profiles", "Avatar");
+            AddColumn("dbo.AspNetUsers", "Avatar", c => c.Binary());
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Profiles", "Avatar", c => c.Binary(storeType: "image"));
+            DropColumn("dbo.AspNetUsers", "Avatar");
         }
     }
 }

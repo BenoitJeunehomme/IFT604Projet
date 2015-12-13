@@ -7,13 +7,13 @@ namespace IFT604Projet.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class AddedAvatars : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedAvatars));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512130011161_InitialCreate"; }
+            get { return "201512130317373_AddedAvatars"; }
         }
         
         string IMigrationMetadata.Source

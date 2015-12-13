@@ -5,15 +5,15 @@ namespace IFT604Projet.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<IFT604Projet.Models.ProfileDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<IFT604Projet.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "IFT604Projet.Models.ProfileDBContext";
+            ContextKey = "IFT604Projet.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(IFT604Projet.Models.ProfileDBContext context)
+        protected override void Seed(IFT604Projet.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

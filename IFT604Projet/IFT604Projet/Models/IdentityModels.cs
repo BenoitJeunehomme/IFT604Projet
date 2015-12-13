@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,10 @@ namespace IFT604Projet.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string Region { get; set; }
+        public int TotalPoints { get; set; }
+        public byte[] Avatar { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
