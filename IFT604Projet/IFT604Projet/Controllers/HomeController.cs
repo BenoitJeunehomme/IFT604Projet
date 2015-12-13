@@ -26,5 +26,12 @@ namespace IFT604Projet.Controllers
 
             return View();
         }
+
+        public ActionResult EventMap()
+        {
+            ViewBag.Message = "Current ongoing event.";
+
+            return View();
+        }
     }
 }
