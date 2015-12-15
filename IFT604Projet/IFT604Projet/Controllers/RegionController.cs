@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IFT604Projet.Models;
+using IFT604Projet.ViewModels;
 
 namespace IFT604Projet.Controllers
 {

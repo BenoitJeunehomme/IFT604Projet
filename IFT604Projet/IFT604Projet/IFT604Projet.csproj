@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Controllers\RankingsController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,11 +220,11 @@
       <DependentUpon>201512150352024_AddedRegionAndInProgressFieldsToGameEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Bomb.cs" />
     <Compile Include="Models\GameEvent.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\IdentityModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -296,6 +297,7 @@
     <Content Include="Views\Region\Create.cshtml" />
     <Content Include="Views\Region\Edit.cshtml" />
     <Content Include="Views\Region\Delete.cshtml" />
+    <None Include="Views\Rankings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

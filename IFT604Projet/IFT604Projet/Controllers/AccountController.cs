@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IFT604Projet.Models;
+using IFT604Projet.ViewModels;
 
 namespace IFT604Projet.Controllers
 {
@@ -106,7 +108,7 @@ namespace IFT604Projet.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -185,22 +187,26 @@ namespace IFT604Projet.Controllers
             if (!ModelState.IsValid) return View(model);
             var user = new ApplicationUser
             {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email,
-                //TODO Add region
+                RegionId = model.RegionId,
                 Score = 0
             };
 
-            byte[] data;
-            using (Stream inputStream = model.UploadImage.InputStream)
+            byte[] data = null;
+
+            if (model.UploadImage != null)
             {
-                MemoryStream memoryStream = inputStream as MemoryStream;
-                if (memoryStream == null)
+                using (Stream inputStream = model.UploadImage.InputStream)
                 {
-                    memoryStream = new MemoryStream();
-                    inputStream.CopyTo(memoryStream);
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    data = memoryStream.ToArray();
                 }
-                data = memoryStream.ToArray();
             }
 
             user.Avatar = data;

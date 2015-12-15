@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using IFT604Projet.Models;
+using IFT604Projet.ViewModels;
 
 namespace IFT604Projet
 {

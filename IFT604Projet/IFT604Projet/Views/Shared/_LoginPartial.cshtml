@@ -1,4 +1,5 @@
 ﻿@using IFT604Projet.Models
+@using IFT604Projet.ViewModels
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.EntityFramework
 @if (Request.IsAuthenticated)
@@ -17,8 +18,11 @@
                         var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                         var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                        var base64 = Convert.ToBase64String(currentUser.Avatar);
-                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        if (currentUser.Avatar != null)
+                        {
+                            var base64 = Convert.ToBase64String(currentUser.Avatar);
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        }
                     }
 
                 }

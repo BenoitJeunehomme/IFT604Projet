@@ -1,3 +1,5 @@
+using IFT604Projet.ViewModels;
+
 namespace IFT604Projet.Migrations
 {
     using System;
@@ -5,7 +7,7 @@ namespace IFT604Projet.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<IFT604Projet.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -13,7 +15,7 @@ namespace IFT604Projet.Migrations
             ContextKey = "IFT604Projet.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(IFT604Projet.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

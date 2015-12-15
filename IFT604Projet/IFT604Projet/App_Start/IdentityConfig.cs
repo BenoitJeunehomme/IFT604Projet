@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using IFT604Projet.Models;
+using IFT604Projet.ViewModels;
 
 namespace IFT604Projet
 {

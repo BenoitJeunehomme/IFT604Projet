@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using IFT604Projet.ViewModels;
 
 namespace IFT604Projet.Models
 {
