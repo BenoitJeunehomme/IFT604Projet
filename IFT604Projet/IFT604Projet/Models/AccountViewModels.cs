@@ -117,4 +117,13 @@ namespace IFT604Projet.Models
         public string Email { get; set; }
     }
 
+    public class ProfileInfoViewModel
+    {
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string RegionId { get; set; }
+        public int Score { get; set; }  
+    }
+
 }

@@ -62,6 +62,36 @@ namespace IFT604Projet.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult List(string uId, int? i)
+        {
+            var usersContext = new ApplicationDbContext();
+
+            if(string.IsNullOrWhiteSpace(uId))
+                return Json(from u in usersContext.Users.ToList()
+                            select new ProfileInfoViewModel
+                            {
+                                Email = u.Email,
+                                Password = u.PasswordHash,
+                                Username = u.UserName,
+                                RegionId = u.Region,
+                                Score = u.TotalPoints
+
+                            }, JsonRequestBehavior.AllowGet);
+
+            ApplicationUser user = usersContext.Users.Find(uId);
+            return Json(new ProfileInfoViewModel
+            {
+                Email = user.Email,
+                Password = user.PasswordHash,
+                Username = user.UserName,
+                RegionId = user.Region,
+                Score = user.TotalPoints
+            },JsonRequestBehavior.AllowGet);
+        }
+
+
         //
         // POST: /Account/Login
         [HttpPost]
