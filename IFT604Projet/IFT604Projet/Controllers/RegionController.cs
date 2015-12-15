@@ -46,7 +46,7 @@ namespace IFT604Projet.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //TODO Change Bind includes
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Region region)
+        public ActionResult Create([Bind(Include = "Name,Latitude,Longitude,Radius")] Region region)
         {
             if (!ModelState.IsValid) return View(region);
             db.Regions.Add(region);
@@ -74,7 +74,7 @@ namespace IFT604Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price")] Region region)
+        public ActionResult Edit([Bind(Include = "ID,Name,Latitude,Longitude,Radius")] Region region)
         {
             if (!ModelState.IsValid) return View(region);
             db.Entry(region).State = EntityState.Modified;

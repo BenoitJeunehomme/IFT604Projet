@@ -71,7 +71,8 @@ namespace IFT604Projet.Models
         public string Email { get; set; }
 
         [Required]
-        public string Region { get; set; }
+        [Display(Name = "Region")]
+        public int RegionId { get; set; }
 
         [Display(Name = "Avatar")]
         public HttpPostedFileBase UploadImage { get; set; }

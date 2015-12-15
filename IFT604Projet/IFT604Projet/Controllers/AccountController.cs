@@ -18,6 +18,7 @@ namespace IFT604Projet.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -66,10 +67,9 @@ namespace IFT604Projet.Controllers
         [AllowAnonymous]
         public ActionResult List(string uId, int? i)
         {
-            var usersContext = new ApplicationDbContext();
 
             if(string.IsNullOrWhiteSpace(uId))
-                return Json(from u in usersContext.Users.ToList()
+                return Json(from u in db.Users.ToList()
                             select new ProfileInfoViewModel
                             {
                                 Email = u.Email,
@@ -80,7 +80,7 @@ namespace IFT604Projet.Controllers
 
                             }, JsonRequestBehavior.AllowGet);
 
-            ApplicationUser user = usersContext.Users.Find(uId);
+            ApplicationUser user = db.Users.Find(uId);
             return Json(new ProfileInfoViewModel
             {
                 Email = user.Email,
@@ -170,6 +170,8 @@ namespace IFT604Projet.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.RegionId = new SelectList(db.Regions, "Id", "Name");
+
             return View();
         }
 
