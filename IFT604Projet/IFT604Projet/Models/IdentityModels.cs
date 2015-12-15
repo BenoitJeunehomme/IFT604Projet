@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -18,9 +20,15 @@ namespace IFT604Projet.Models
             return userIdentity;
         }
 
-        public string Region { get; set; }
-        public int TotalPoints { get; set; }
+        public int RegionId { get; set; }
+        public Region Region { get; set; }
+        public int Score { get; set; }
         public byte[] Avatar { get; set; }
+
+        [InverseProperty("Defusers")]
+        public virtual ICollection<GameEvent> DefuserGames { get; set; }
+        [InverseProperty("Placers")]
+        public virtual ICollection<GameEvent> PlacerGames { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -30,9 +38,39 @@ namespace IFT604Projet.Models
         {
         }
 
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Bomb> Bombs { get; set; }
+        public DbSet<GameEvent> GameEvents { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.DefuserGames)
+                .WithMany(t => t.Defusers)
+                .Map(x =>
+                {
+                    x.MapLeftKey("Id");
+                    x.MapRightKey("GameEventId");
+                    x.ToTable("DefusersGameEvent");
+                });
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.PlacerGames)
+                .WithMany(t => t.Placers)
+                .Map(x =>
+                {
+                    x.MapLeftKey("Id");
+                    x.MapRightKey("GameEventId");
+                    x.ToTable("PlacersGameEvent");
+                });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

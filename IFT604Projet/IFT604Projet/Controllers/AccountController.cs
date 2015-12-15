@@ -75,8 +75,8 @@ namespace IFT604Projet.Controllers
                                 Email = u.Email,
                                 Password = u.PasswordHash,
                                 Username = u.UserName,
-                                RegionId = u.Region,
-                                Score = u.TotalPoints
+                                //TODO Add Region
+                                Score = u.Score
 
                             }, JsonRequestBehavior.AllowGet);
 
@@ -86,8 +86,8 @@ namespace IFT604Projet.Controllers
                 Email = user.Email,
                 Password = user.PasswordHash,
                 Username = user.UserName,
-                RegionId = user.Region,
-                Score = user.TotalPoints
+                //TODO Add region
+                Score = user.Score
             },JsonRequestBehavior.AllowGet);
         }
 
@@ -180,41 +180,43 @@ namespace IFT604Projet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            var user = new ApplicationUser
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                user.Region = model.Region;
-                user.TotalPoints = 0;
+                UserName = model.Email,
+                Email = model.Email,
+                //TODO Add region
+                Score = 0
+            };
 
-                byte[] data;
-                using (Stream inputStream = model.UploadImage.InputStream)
+            byte[] data;
+            using (Stream inputStream = model.UploadImage.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if (memoryStream == null)
                 {
-                    MemoryStream memoryStream = inputStream as MemoryStream;
-                    if (memoryStream == null)
-                    {
-                        memoryStream = new MemoryStream();
-                        inputStream.CopyTo(memoryStream);
-                    }
-                    data = memoryStream.ToArray();
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
                 }
-
-                user.Avatar = data;
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                data = memoryStream.ToArray();
             }
+
+            user.Avatar = data;
+
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
 
             // If we got this far, something failed, redisplay form
             return View(model);

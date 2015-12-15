@@ -196,10 +196,29 @@
     <Compile Include="Migrations\201512130317373_AddedAvatars.Designer.cs">
       <DependentUpon>201512130317373_AddedAvatars.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512150234400_AddNewModelsAndRenamedColumnTotalPointsToScore.cs" />
+    <Compile Include="Migrations\201512150234400_AddNewModelsAndRenamedColumnTotalPointsToScore.Designer.cs">
+      <DependentUpon>201512150234400_AddNewModelsAndRenamedColumnTotalPointsToScore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512150240310_AddedVirtualKeywordsToManyToManyRelationships.cs" />
+    <Compile Include="Migrations\201512150240310_AddedVirtualKeywordsToManyToManyRelationships.Designer.cs">
+      <DependentUpon>201512150240310_AddedVirtualKeywordsToManyToManyRelationships.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512150245457_RemovedManyToManyRelationship.cs" />
+    <Compile Include="Migrations\201512150245457_RemovedManyToManyRelationship.Designer.cs">
+      <DependentUpon>201512150245457_RemovedManyToManyRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs" />
+    <Compile Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.Designer.cs">
+      <DependentUpon>201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Bomb.cs" />
+    <Compile Include="Models\GameEvent.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -280,6 +299,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512130317373_AddedAvatars.resx">
       <DependentUpon>201512130317373_AddedAvatars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150234400_AddNewModelsAndRenamedColumnTotalPointsToScore.resx">
+      <DependentUpon>201512150234400_AddNewModelsAndRenamedColumnTotalPointsToScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150240310_AddedVirtualKeywordsToManyToManyRelationships.resx">
+      <DependentUpon>201512150240310_AddedVirtualKeywordsToManyToManyRelationships.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150245457_RemovedManyToManyRelationship.resx">
+      <DependentUpon>201512150245457_RemovedManyToManyRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.resx">
+      <DependentUpon>201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
