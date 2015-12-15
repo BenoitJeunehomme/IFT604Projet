@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,10 @@
     <Compile Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs" />
     <Compile Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.Designer.cs">
       <DependentUpon>201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512150352024_AddedRegionAndInProgressFieldsToGameEvent.cs" />
+    <Compile Include="Migrations\201512150352024_AddedRegionAndInProgressFieldsToGameEvent.Designer.cs">
+      <DependentUpon>201512150352024_AddedRegionAndInProgressFieldsToGameEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -285,10 +290,14 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Region\Details.cshtml" />
+    <Content Include="Views\Region\Create.cshtml" />
+    <Content Include="Views\Region\Edit.cshtml" />
+    <Content Include="Views\Region\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Region\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -319,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.resx">
       <DependentUpon>201512150259397_ApplicationManyToManyRelationShipWithFluentAPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150352024_AddedRegionAndInProgressFieldsToGameEvent.resx">
+      <DependentUpon>201512150352024_AddedRegionAndInProgressFieldsToGameEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

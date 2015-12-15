@@ -59,7 +59,7 @@ namespace IFT604Projet.Migrations
             CreateIndex("dbo.AspNetUsers", "RegionId");
             CreateIndex("dbo.AspNetUsers", "GameEvent_Id");
             CreateIndex("dbo.AspNetUsers", "GameEvent_Id1");
-            AddForeignKey("dbo.AspNetUsers", "RegionId", "dbo.Regions", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.AspNetUsers", "RegionId", "dbo.Regions", "Id", cascadeDelete: false);
             AddForeignKey("dbo.AspNetUsers", "GameEvent_Id", "dbo.GameEvents", "Id");
             AddForeignKey("dbo.AspNetUsers", "GameEvent_Id1", "dbo.GameEvents", "Id");
             DropColumn("dbo.AspNetUsers", "Region");

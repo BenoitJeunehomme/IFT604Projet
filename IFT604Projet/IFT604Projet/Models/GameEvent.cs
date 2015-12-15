@@ -22,6 +22,11 @@ namespace IFT604Projet.Models
         [Required]
         public DateTime StopDefusing { get; set; }
 
+        public bool  InProgress { get; set; }
+
+        public int RegionId { get; set; }
+        public Region Region { get; set; }
+
         public ICollection<Bomb> Bombs { get; set; }
 
         [InverseProperty("DefuserGames")]
