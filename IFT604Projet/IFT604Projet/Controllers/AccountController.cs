@@ -120,6 +120,50 @@ namespace IFT604Projet.Controllers
             }
         }
 
+        // POST: /Account/MLogin
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult MLogin(string username, string password)
+        {
+            var result = SignInManager.PasswordSignIn(username, password, false, false);
+            if (result == SignInStatus.Success)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: /Account/MRegister
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult MRegister(string username, string email, string password, string confirmPassword,
+            int regionId)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = username,
+                Email = email,
+                RegionId = regionId,
+                Score = 0
+            };
+
+            var result = UserManager.Create(user, password);
+            if (result.Succeeded)
+            {
+                SignInManager.SignIn(user, false, false);
+
+                return Json(new MobileRegisterConfirmationViewModel
+                {
+                    Username = username,
+                    Email = email,
+                    RegionId = regionId
+                });
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
