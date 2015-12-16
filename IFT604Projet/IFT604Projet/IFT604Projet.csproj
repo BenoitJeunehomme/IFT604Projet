@@ -184,7 +184,14 @@
     <Compile Include="Migrations\201512160714062_ChangedStatePropertyFromGameEvents.Designer.cs">
       <DependentUpon>201512160714062_ChangedStatePropertyFromGameEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\GameEventHandler.cs" />
     <Compile Include="Services\GameEventService.cs" />
+    <Compile Include="Services\States\Completed.cs" />
+    <Compile Include="Services\States\Contract\IState.cs" />
+    <Compile Include="Services\States\Defusing.cs" />
+    <Compile Include="Services\States\NotStarted.cs" />
+    <Compile Include="Services\States\Placing.cs" />
+    <Compile Include="Services\States\WaitingForDefuse.cs" />
     <Compile Include="ViewModels\GameEventViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
