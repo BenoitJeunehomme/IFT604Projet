@@ -184,6 +184,7 @@
     <Compile Include="Migrations\201512160714062_ChangedStatePropertyFromGameEvents.Designer.cs">
       <DependentUpon>201512160714062_ChangedStatePropertyFromGameEvents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\GameEventService.cs" />
     <Compile Include="ViewModels\GameEventViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

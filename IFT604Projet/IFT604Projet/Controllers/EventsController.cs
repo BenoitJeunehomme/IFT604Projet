@@ -4,24 +4,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using IFT604Projet.Services;
 
 namespace IFT604Projet.Controllers
 {
     public class EventsController : Controller
     {
-        private static readonly Dictionary<int, GameEventHandler> GAME_EVENT_HANDLERS = new Dictionary<int, GameEventHandler>();
         private readonly ApplicationDbContext m_db = new ApplicationDbContext();
-
-        public static void Initialize()
-        {
-            var db = new ApplicationDbContext();
-
-            var events = db.GameEvents.Where(g => g.State != GameEventState.Completed)
-                .Include(g => g.Placers).Include(g => g.Defusers).Include(g => g.Region).ToList();
-
-            foreach (var gameEvent in events)
-                GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent));
-        }
 
         public ActionResult Index()
         {
@@ -39,11 +28,10 @@ namespace IFT604Projet.Controllers
         {
             if (!regionId.HasValue) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
 
-            var evt =
-                m_db.GameEvents.FirstOrDefault(e => e.RegionId == regionId.Value && e.State != GameEventState.Completed);
-            return evt == null
-                ? Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed })
-                : Json(new GameEventStateViewModel { RegionId = evt.RegionId, State = evt.State }, JsonRequestBehavior.AllowGet);
+            var state =
+                GameEventService.GetState(regionId.Value);
+
+                return Json(new GameEventStateViewModel { RegionId = regionId.Value, State = state }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -60,7 +48,7 @@ namespace IFT604Projet.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (GAME_EVENT_HANDLERS.ContainsKey(model.RegionId))
+            if (GameEventService.OngoingEvent(model.RegionId))
             {
                 ModelState.AddModelError("", "Region already as an event scheduled!");
                 return View(model);
@@ -77,7 +65,7 @@ namespace IFT604Projet.Controllers
             };
 
             m_db.GameEvents.Add(gameEvent);
-            GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent));
+            GameEventService.StartEvent(gameEvent);
 
             return RedirectToAction("Index", "Events");
         }
@@ -92,13 +80,4 @@ namespace IFT604Projet.Controllers
         }
     }
 
-    internal class GameEventHandler
-    {
-        private GameEvent evt;
-
-        public GameEventHandler(GameEvent gameEvent)
-        {
-            evt = gameEvent;
-        }
-    }
 }

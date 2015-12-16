@@ -9,6 +9,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using IFT604Projet.Controllers;
+using IFT604Projet.Services;
 
 namespace IFT604Projet
 {
@@ -22,7 +23,7 @@ namespace IFT604Projet
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            EventsController.Initialize();
+            GameEventService.Initialize();
         }
     }
 }
