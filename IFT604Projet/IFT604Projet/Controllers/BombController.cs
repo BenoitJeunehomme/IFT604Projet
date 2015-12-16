@@ -35,12 +35,12 @@ namespace IFT604Projet.Controllers
                     BombId = bombId
                 }, JsonRequestBehavior.AllowGet);
 
-            Point p = new Point(lattitude.Value, longitude.Value);
+            GPSPostition p = new GPSPostition(lattitude.Value, longitude.Value);
             var bombs = m_db.Bombs.Where(b => b.GameId == GameEventService.GetGameId(user.RegionId)).ToList();
 
             foreach (var bomb in bombs)
             {
-                double distance = Distance(p, new Point(bomb.Latitude, bomb.Longitude));
+                double distance = Distance(p, new GPSPostition(bomb.Latitude, bomb.Longitude));
                 if (!(minDist > distance)) continue;
                 bombId = bomb.Id;
                 minDist = distance;
@@ -111,23 +111,31 @@ namespace IFT604Projet.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public double Distance(Point p1, Point p2)
+        public double Distance(GPSPostition p1, GPSPostition p2)
         {
-            return Math.Sqrt(Math.Pow((p2.Y - p1.Y), 2) + Math.Pow((p2.X - p1.X), 2));
+            var latMid = (p1.Latitude + p2.Latitude) / 2.0;
+
+            var m_per_deg_lat = 111132.954 - 559.822 * Math.Cos(2.0 * latMid) + 1.175 * Math.Cos(4.0 * latMid);
+            var m_per_deg_lon = (3.14159265359 / 180) * 6367449 * Math.Cos(latMid);
+
+            var deltaLat = Math.Abs(p1.Latitude - p2.Latitude);
+            var deltaLon = Math.Abs(p1.Longitude - p2.Longitude);
+
+            return Math.Sqrt(Math.Pow(deltaLat * m_per_deg_lat, 2) + Math.Pow(deltaLon * m_per_deg_lon, 2));
         }
 
 
     }
 
-    public class Point
+    public class GPSPostition
     {
-        public double X { get; set; }
-        public double Y { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
-        public Point(double x, double y)
+        public GPSPostition(double lat, double lg)
         {
-            X = x;
-            Y = y;
+            Latitude = lat;
+            Longitude = lg;
         }
     }
 }
