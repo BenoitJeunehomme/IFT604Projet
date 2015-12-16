@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IFT604Projet.Models;
+using IFT604Projet.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using IFT604Projet.Models;
-using IFT604Projet.ViewModels;
 
 namespace IFT604Projet.Controllers
 {
@@ -42,7 +39,7 @@ namespace IFT604Projet.Controllers
         }
 
         // POST: Regions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,7 +68,7 @@ namespace IFT604Projet.Controllers
         }
 
         // POST: Regions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -24,12 +24,10 @@ namespace IFT604Projet.Models
         [Required]
         public DateTime StopDefusing { get; set; }
 
-        public bool  InProgress { get; set; }
+        public GameEventState State { get; set; }
 
         public int RegionId { get; set; }
         public Region Region { get; set; }
-
-        public GameEventState State { get; set; }
 
         public ICollection<Bomb> Bombs { get; set; }
 

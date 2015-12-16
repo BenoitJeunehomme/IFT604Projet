@@ -32,6 +32,7 @@ namespace IFT604Projet.ViewModels
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -64,9 +65,8 @@ namespace IFT604Projet.ViewModels
 
     public class RegisterViewModel
     {
-
         [Required]
-        [Display(Name="Username")]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
@@ -128,7 +128,7 @@ namespace IFT604Projet.ViewModels
         public string Username { get; set; }
         public string Password { get; set; }
         public string RegionId { get; set; }
-        public int Score { get; set; }  
+        public int Score { get; set; }
     }
 
     public class RankingViewModel
@@ -137,5 +137,4 @@ namespace IFT604Projet.ViewModels
         public int Score { get; set; }
         public int RegionId { get; set; }
     }
-
 }
