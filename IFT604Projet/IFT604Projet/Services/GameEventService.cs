@@ -40,7 +40,7 @@ namespace IFT604Projet.Services
 
         public static void StartEvent(GameEvent gameEvent)
         {
-            GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent,DB) );
+            GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent, DB));
         }
     }
 }

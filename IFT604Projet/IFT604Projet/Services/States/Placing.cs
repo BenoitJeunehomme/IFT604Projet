@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IFT604Projet.Models;
 using IFT604Projet.Services.States.Contract;
 
 namespace IFT604Projet.Services.States
@@ -11,7 +12,12 @@ namespace IFT604Projet.Services.States
     {
         public void GoNext(GameEventHandler handler)
         {
-            throw new NotImplementedException();
+            handler.ChangeState(new WaitingForDefuse());
+        }
+
+        public GameEventState GetModelState()
+        {
+            return GameEventState.Placing;
         }
     }
 }

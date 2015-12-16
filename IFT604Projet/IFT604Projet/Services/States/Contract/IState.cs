@@ -1,7 +1,10 @@
-﻿namespace IFT604Projet.Services.States.Contract
+﻿using IFT604Projet.Models;
+
+namespace IFT604Projet.Services.States.Contract
 {
     public interface IState
     {
         void GoNext(GameEventHandler handler);
+        GameEventState GetModelState();
     }
 }

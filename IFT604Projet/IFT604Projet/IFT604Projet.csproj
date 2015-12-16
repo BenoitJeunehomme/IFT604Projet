@@ -238,7 +238,7 @@
     <Compile Include="Models\Bomb.cs" />
     <Compile Include="Models\GameEvent.cs" />
     <Compile Include="ViewModels\BombViewModel.cs" />
-    <Compile Include="ViewModels\IdentityModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Region.cs" />
