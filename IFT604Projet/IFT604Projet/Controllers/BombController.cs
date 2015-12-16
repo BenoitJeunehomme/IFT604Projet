@@ -15,12 +15,20 @@ namespace IFT604Projet.Controllers
         // GET: Distance to closest bomb
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ClosestDistance(double? lattitude, double? longitude, int? regionId)
+        public ActionResult ClosestDistance(double? lattitude, double? longitude, string username)
         {
             double minDist = double.MaxValue;
             int bombId = -1;
 
-            if (!lattitude.HasValue || !longitude.HasValue || !regionId.HasValue)
+            if (!lattitude.HasValue || !longitude.HasValue || !string.IsNullOrWhiteSpace(username))
+                return Json(new ClosestBombDistanceViewModel()
+                {
+                    Distance = minDist,
+                    BombId = bombId
+                }, JsonRequestBehavior.AllowGet);
+
+            var user = m_db.Users.Find(username);
+            if(user == null)
                 return Json(new ClosestBombDistanceViewModel()
                 {
                     Distance = minDist,
@@ -28,7 +36,7 @@ namespace IFT604Projet.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             Point p = new Point(lattitude.Value, longitude.Value);
-            var bombs = m_db.Bombs.Where(b => b.GameId == GameEventService.GetGameId(regionId.Value)).ToList();
+            var bombs = m_db.Bombs.Where(b => b.GameId == GameEventService.GetGameId(user.RegionId)).ToList();
 
             foreach (var bomb in bombs)
             {
@@ -66,9 +74,18 @@ namespace IFT604Projet.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Plant(double? lattitude, double? longitude, int? regionId)
+        public ActionResult Plant(double? lattitude, double? longitude, string username)
         {
-            if (!lattitude.HasValue || !longitude.HasValue || !regionId.HasValue)
+            if (!lattitude.HasValue || !longitude.HasValue || !string.IsNullOrWhiteSpace(username))
+                return Json(new PlantConfirmationViewModel
+                {
+                    Lattitude = -1,
+                    Longitude = -1,
+                    Planted = false
+                }, JsonRequestBehavior.AllowGet);
+
+            var user = m_db.Users.Find(username);
+            if(user != null)
                 return Json(new PlantConfirmationViewModel
                 {
                     Lattitude = -1,
@@ -78,7 +95,7 @@ namespace IFT604Projet.Controllers
 
             var bomb = new Bomb
             {
-                GameId = GameEventService.GetGameId(regionId.Value),
+                GameId = GameEventService.GetGameId(user.RegionId),
                 IsDefused = false,
                 Latitude = lattitude.Value,
                 Longitude = longitude.Value

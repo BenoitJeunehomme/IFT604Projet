@@ -7,8 +7,8 @@ namespace IFT604Projet.Controllers
 {
     public class GameEventStateViewModel
     {
-        public int RegionId { get; set; }
         public GameEventState State { get; set; }
+        public string Username { get; set; }
     }
 
     public class CreateGameEventViewModel

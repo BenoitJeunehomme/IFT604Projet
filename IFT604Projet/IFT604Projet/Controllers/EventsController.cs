@@ -26,14 +26,16 @@ namespace IFT604Projet.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult State(int? regionId)
+        public ActionResult State(string username)
         {
-            if (!regionId.HasValue) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
+            if (!string.IsNullOrWhiteSpace(username)) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
 
+            var user = m_db.Users.Find(username);
+            if(user == null) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
             var state =
-                GameEventService.GetState(regionId.Value);
+                GameEventService.GetState(user.RegionId);
 
-                return Json(new GameEventStateViewModel { RegionId = regionId.Value, State = state }, JsonRequestBehavior.AllowGet);
+            return Json(new GameEventStateViewModel { Username = username, State = state }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -81,7 +83,7 @@ namespace IFT604Projet.Controllers
             Random rand = new Random();
 
             List<ApplicationUser> placers = new List<ApplicationUser>();
-            int teamCount = users.Count/2;
+            int teamCount = users.Count / 2;
             for (int i = 0; i < teamCount; i++)
             {
                 var placer = users[rand.Next(users.Count)];
