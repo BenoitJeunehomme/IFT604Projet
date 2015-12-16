@@ -28,10 +28,10 @@ namespace IFT604Projet.Controllers
         [AllowAnonymous]
         public ActionResult State(string username)
         {
-            if (!string.IsNullOrWhiteSpace(username)) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
+            if (!string.IsNullOrWhiteSpace(username)) return Json(new GameEventStateViewModel { Username = string.Empty, State = GameEventState.Completed });
 
             var user = m_db.Users.Find(username);
-            if(user == null) return Json(new GameEventStateViewModel { RegionId = -1, State = GameEventState.Completed });
+            if(user == null) return Json(new GameEventStateViewModel { Username = username, State = GameEventState.Completed });
             var state =
                 GameEventService.GetState(user.RegionId);
 
