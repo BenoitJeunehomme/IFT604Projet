@@ -17,6 +17,19 @@ namespace IFT604Projet.Controllers
             return View(db.Regions.ToList());
         }
 
+        // GET: Regions/List
+        public ActionResult List()
+        {
+            var regions = from region in db.Regions
+                            select new RegionViewModel
+                            {
+                                id = region.Id,
+                                name = region.Name
+                            };
+
+            return Json(regions.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Regions/Details/5
         public ActionResult Details(int? id)
         {

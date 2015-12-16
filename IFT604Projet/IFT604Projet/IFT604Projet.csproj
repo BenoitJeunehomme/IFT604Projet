@@ -210,7 +210,6 @@
     <Compile Include="ViewModels\GameEventViewModels.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\RankingsController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -255,7 +254,6 @@
     <Compile Include="ViewModels\BombViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -350,7 +348,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <None Include="Properties\PublishProfiles\BombSquad.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -366,7 +364,6 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -405,11 +402,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Movies\Create.cshtml" />
-    <Content Include="Views\Movies\Delete.cshtml" />
-    <Content Include="Views\Movies\Details.cshtml" />
-    <Content Include="Views\Movies\Edit.cshtml" />
-    <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Region\Details.cshtml" />
     <Content Include="Views\Region\Create.cshtml" />
@@ -417,6 +409,9 @@
     <Content Include="Views\Region\Delete.cshtml" />
     <None Include="Views\Events\Create.cshtml" />
     <None Include="Views\Rankings\Index.cshtml" />
+    <None Include="Web.BombSquad.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
