@@ -12,12 +12,19 @@ namespace IFT604Projet.Services.States
     {
         public void GoNext(GameEventHandler handler)
         {
+            Console.WriteLine("Changing from Defusing to Completed");
+
             handler.ChangeState(new Completed());
         }
 
         public GameEventState GetModelState()
         {
             return GameEventState.Defusing;
+        }
+
+        public DateTime GetTimeToChangeState(GameEvent evt)
+        {
+            return evt.StopDefusing;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using IFT604Projet.Models;
-using IFT604Projet.ViewModels;
+﻿using System;
+using IFT604Projet.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using IFT604Projet.Services;
+using Quartz;
+using Quartz.Impl;
 
 namespace IFT604Projet.Controllers
 {
@@ -64,10 +66,31 @@ namespace IFT604Projet.Controllers
                 RegionId = model.RegionId
             };
 
+            PrepareTeams(gameEvent);
+
             m_db.GameEvents.Add(gameEvent);
+            m_db.SaveChanges();
             GameEventService.StartEvent(gameEvent);
 
             return RedirectToAction("Index", "Events");
+        }
+
+        private void PrepareTeams(GameEvent gameEvent)
+        {
+            var users = m_db.Users.Where(u => u.RegionId == gameEvent.RegionId).ToList();
+            Random rand = new Random();
+
+            List<ApplicationUser> placers = new List<ApplicationUser>();
+            int teamCount = users.Count/2;
+            for (int i = 0; i < teamCount; i++)
+            {
+                var placer = users[rand.Next(users.Count)];
+                placers.Add(placer);
+                users.Remove(placer);
+            }
+
+            gameEvent.Placers = placers;
+            gameEvent.Defusers = users;
         }
 
         protected override void Dispose(bool disposing)
@@ -80,4 +103,11 @@ namespace IFT604Projet.Controllers
         }
     }
 
+    public class MyJob : IJob
+    {
+        public void Execute(IJobExecutionContext context)
+        {
+            Console.WriteLine("Test");
+        }
+    }
 }

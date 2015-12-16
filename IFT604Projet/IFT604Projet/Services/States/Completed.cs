@@ -12,12 +12,20 @@ namespace IFT604Projet.Services.States
     {
         public void GoNext(GameEventHandler handler)
         {
+            Console.WriteLine("Changing from Completed to clisig the event and giving points");
+
             //No other states after
+            handler.CloseEvent();
         }
 
         public GameEventState GetModelState()
         {
             return GameEventState.Completed;
+        }
+
+        public DateTime GetTimeToChangeState(GameEvent evt)
+        {
+            return DateTime.Now.AddYears(-1);
         }
     }
 }

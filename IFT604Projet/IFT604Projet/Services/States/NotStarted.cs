@@ -12,12 +12,18 @@ namespace IFT604Projet.Services.States
     {
        public void GoNext(GameEventHandler handler)
        {
+           Console.WriteLine("Changing from NotStarted to Placing");
            handler.ChangeState(new Placing());
        }
 
        public GameEventState GetModelState()
        {
            return GameEventState.NotStarted;
+       }
+
+       public DateTime GetTimeToChangeState(GameEvent evt)
+       {
+           return evt.StartPlacing;
        }
     }
 }

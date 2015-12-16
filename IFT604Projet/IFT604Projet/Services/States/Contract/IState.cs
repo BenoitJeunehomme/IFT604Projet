@@ -1,4 +1,5 @@
-﻿using IFT604Projet.Models;
+﻿using System;
+using IFT604Projet.Models;
 
 namespace IFT604Projet.Services.States.Contract
 {
@@ -6,5 +7,6 @@ namespace IFT604Projet.Services.States.Contract
     {
         void GoNext(GameEventHandler handler);
         GameEventState GetModelState();
+        DateTime GetTimeToChangeState(GameEvent evt);
     }
 }

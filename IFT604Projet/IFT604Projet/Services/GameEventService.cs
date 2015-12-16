@@ -26,6 +26,13 @@ namespace IFT604Projet.Services
                 GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent, db));
         }
 
+        public static int GetGameId(int regionId)
+        {
+            return GAME_EVENT_HANDLERS.ContainsKey(regionId)
+                ? GAME_EVENT_HANDLERS[regionId].GetId()
+                : -1;
+        }
+
         public static GameEventState GetState(int regionId)
         {
             return GAME_EVENT_HANDLERS.ContainsKey(regionId)
@@ -41,6 +48,11 @@ namespace IFT604Projet.Services
         public static void StartEvent(GameEvent gameEvent)
         {
             GAME_EVENT_HANDLERS.Add(gameEvent.RegionId, new GameEventHandler(gameEvent, DB));
+        }
+
+        public static void StopEvent(GameEvent gameEvent)
+        {
+            GAME_EVENT_HANDLERS.Remove(gameEvent.RegionId);
         }
     }
 }

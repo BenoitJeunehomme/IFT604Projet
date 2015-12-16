@@ -12,12 +12,19 @@ namespace IFT604Projet.Services.States
     {
         public void GoNext(GameEventHandler handler)
         {
+            Console.WriteLine("Changing from Placing to WaitingForDefuse");
+
             handler.ChangeState(new WaitingForDefuse());
         }
 
         public GameEventState GetModelState()
         {
             return GameEventState.Placing;
+        }
+
+        public DateTime GetTimeToChangeState(GameEvent evt)
+        {
+            return evt.EndPlacing;
         }
     }
 }
