@@ -14,13 +14,13 @@ namespace IFT604Projet.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Movies
+        // GET: Regions
         public ActionResult Index()
         {
             return View(db.Regions.ToList());
         }
 
-        // GET: Movies/Details/5
+        // GET: Regions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace IFT604Projet.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Create
+        // GET: Regions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Regions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -55,7 +55,7 @@ namespace IFT604Projet.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Movies/Edit/5
+        // GET: Regions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,7 @@ namespace IFT604Projet.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Regions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -83,7 +83,7 @@ namespace IFT604Projet.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Movies/Delete/5
+        // GET: Regions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -98,7 +98,7 @@ namespace IFT604Projet.Controllers
             return View(region);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Regions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

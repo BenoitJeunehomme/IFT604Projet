@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,6 +29,8 @@ namespace IFT604Projet.Models
         public int RegionId { get; set; }
         public Region Region { get; set; }
 
+        public GameEventState State { get; set; }
+
         public ICollection<Bomb> Bombs { get; set; }
 
         [InverseProperty("DefuserGames")]
@@ -35,5 +38,14 @@ namespace IFT604Projet.Models
         [InverseProperty("PlacerGames")]
         public virtual ICollection<ApplicationUser> Placers { get; set; }
 
+    }
+
+    public enum GameEventState
+    {
+        NotStarted,
+        Placing,
+        WaitingForDefuse,
+        Defusing,
+        Completed
     }
 }
