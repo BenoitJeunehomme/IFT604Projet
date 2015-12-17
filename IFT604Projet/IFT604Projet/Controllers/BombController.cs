@@ -86,7 +86,7 @@ namespace IFT604Projet.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             var user = m_db.Users.Find(username);
-            if(user != null)
+            if(user == null)
                 return Json(new PlantConfirmationViewModel
                 {
                     Lattitude = -1,
