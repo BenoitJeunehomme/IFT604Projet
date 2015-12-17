@@ -408,8 +408,8 @@
     <Content Include="Views\Region\Create.cshtml" />
     <Content Include="Views\Region\Edit.cshtml" />
     <Content Include="Views\Region\Delete.cshtml" />
-    <None Include="Views\Events\Create.cshtml" />
-    <None Include="Views\Rankings\Index.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Rankings\Index.cshtml" />
     <None Include="Web.BombSquad.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
