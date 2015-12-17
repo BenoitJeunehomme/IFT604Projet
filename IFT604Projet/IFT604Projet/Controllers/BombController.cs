@@ -27,7 +27,7 @@ namespace IFT604Projet.Controllers
                     BombId = bombId
                 }, JsonRequestBehavior.AllowGet);
 
-            var user = m_db.Users.Find(username);
+            var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
             if(user == null)
                 return Json(new ClosestBombDistanceViewModel()
                 {
@@ -36,7 +36,8 @@ namespace IFT604Projet.Controllers
                 }, JsonRequestBehavior.AllowGet);
 
             GPSPostition p = new GPSPostition(lattitude.Value, longitude.Value);
-            var bombs = m_db.Bombs.Where(b => b.GameId == GameEventService.GetGameId(user.RegionId)).ToList();
+            int gameId = GameEventService.GetGameId(user.RegionId);
+            var bombs = m_db.Bombs.Where(b => b.GameId == gameId).ToList();
 
             foreach (var bomb in bombs)
             {
@@ -85,8 +86,8 @@ namespace IFT604Projet.Controllers
                     Planted = false
                 }, JsonRequestBehavior.AllowGet);
 
-            var user = m_db.Users.Find(username);
-            if(user == null)
+            var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            if (user == null)
                 return Json(new PlantConfirmationViewModel
                 {
                     Lattitude = -1,

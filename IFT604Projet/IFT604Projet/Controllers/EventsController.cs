@@ -31,8 +31,8 @@ namespace IFT604Projet.Controllers
             if (string.IsNullOrWhiteSpace(username))
                 return Json(new GameEventStateViewModel { Username = string.Empty, State = GameEventState.Completed }, JsonRequestBehavior.AllowGet);
 
-            var user = m_db.Users.Find(username);
-            if(user == null)
+            var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            if (user == null)
                 return Json(new GameEventStateViewModel { Username = username, State = GameEventState.Completed }, JsonRequestBehavior.AllowGet);
 
             var state =

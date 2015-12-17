@@ -14,15 +14,15 @@ namespace IFT604Projet.Controllers
         {
             var db = new ApplicationDbContext();
             var rankings = from u in db.Users
-                          orderby u.Score descending
-                          select new RankingViewModel
-                          {
-                              RegionId = u.RegionId,
-                              Score = u.Score,
-                              Name = u.UserName
-                          };
+                           orderby u.Score descending
+                           select new RankingViewModel
+                           {
+                               RegionId = u.RegionId,
+                               Score = u.Score,
+                               Name = u.UserName
+                           };
 
-           // ViewBag.RegionId = new SelectList(db.Regions.ToList(), "Id", "Name");
+            // ViewBag.RegionId = new SelectList(db.Regions.ToList(), "Id", "Name");
 
             return View(rankings);
         }
