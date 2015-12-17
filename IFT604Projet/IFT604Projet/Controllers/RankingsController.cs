@@ -27,6 +27,8 @@ namespace IFT604Projet.Controllers
             return View(rankings);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult List(string username)
         {
 
