@@ -137,29 +137,28 @@ namespace IFT604Projet.Controllers
         [HttpPost]
         [AllowAnonymous]
         public ActionResult MRegister(string username, string email, string password, string confirmPassword,
-            int regionId)
+            int? regionId)
         {
+            if (regionId == null) return Json(false, JsonRequestBehavior.AllowGet);
             var user = new ApplicationUser
             {
                 UserName = username,
                 Email = email,
-                RegionId = regionId,
+                RegionId = regionId.Value,
                 Score = 0
             };
 
             var result = UserManager.Create(user, password);
-            if (result.Succeeded)
-            {
-                SignInManager.SignIn(user, false, false);
+            if (!result.Succeeded) return Json(false, JsonRequestBehavior.AllowGet);
 
-                return Json(new MobileRegisterConfirmationViewModel
-                {
-                    Username = username,
-                    Email = email,
-                    RegionId = regionId
-                });
-            }
-            return Json(false, JsonRequestBehavior.AllowGet);
+            SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+
+            return Json(new MobileRegisterConfirmationViewModel
+            {
+                Username = username,
+                Email = email,
+                RegionId = regionId.Value
+            });
         }
 
         //
