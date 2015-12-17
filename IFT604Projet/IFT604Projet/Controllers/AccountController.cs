@@ -136,7 +136,6 @@ namespace IFT604Projet.Controllers
         // POST: /Account/MRegister
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult MRegister(string username, string email, string password, string confirmPassword,
             int regionId)
         {
