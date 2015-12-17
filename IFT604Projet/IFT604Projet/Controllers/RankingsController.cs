@@ -26,5 +26,22 @@ namespace IFT604Projet.Controllers
 
             return View(rankings);
         }
+
+        public ActionResult List(string username)
+        {
+            var db = new ApplicationDbContext();
+            var rankings = from u in db.Users
+                           orderby u.Score descending
+                           select new RankingViewModel
+                           {
+                               RegionId = u.RegionId,
+                               Score = u.Score,
+                               Name = u.UserName
+                           };
+
+            // ViewBag.RegionId = new SelectList(db.Regions.ToList(), "Id", "Name");
+
+            return Json(rankings,JsonRequestBehavior.AllowGet);
+        }
     }
 }
