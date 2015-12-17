@@ -123,7 +123,6 @@ namespace IFT604Projet.Controllers
         // POST: /Account/MLogin
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult MLogin(string username, string password)
         {
             var result = SignInManager.PasswordSignIn(username, password, false, false);
