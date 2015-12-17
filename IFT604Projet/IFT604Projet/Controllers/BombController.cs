@@ -65,7 +65,7 @@ namespace IFT604Projet.Controllers
             var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
             var evt = m_db.GameEvents.Find(bomb.GameId);
 
-            if (bomb == null || user == null || evt == null || bomb.IsDefused || bomb.PlantedForGame.State != GameEventState.Defusing)
+            if (bomb == null || user == null || evt == null || bomb.IsDefused || evt.State != GameEventState.Defusing)
                 return Json(new DefuseConfirmationViewModel { BombId = bombId.Value, Defused = false }, JsonRequestBehavior.AllowGet);
 
             bomb.IsDefused = true;
