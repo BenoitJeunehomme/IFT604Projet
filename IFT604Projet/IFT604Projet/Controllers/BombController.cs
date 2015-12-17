@@ -37,7 +37,7 @@ namespace IFT604Projet.Controllers
 
             GPSPostition p = new GPSPostition(lattitude.Value, longitude.Value);
             int gameId = GameEventService.GetGameId(user.RegionId);
-            var bombs = m_db.Bombs.Where(b => b.GameId == gameId).ToList();
+            var bombs = m_db.Bombs.Where(b => b.GameId == gameId && !b.IsDefused).ToList();
 
             foreach (var bomb in bombs)
             {
@@ -95,6 +95,15 @@ namespace IFT604Projet.Controllers
                     Planted = false
                 }, JsonRequestBehavior.AllowGet);
 
+            if(GameEventService.GetState(user.RegionId) != GameEventState.Placing)
+                return Json(new PlantConfirmationViewModel
+                {
+                    Lattitude = -1,
+                    Longitude = -1,
+                    Planted = false
+                }, JsonRequestBehavior.AllowGet);
+
+
             var bomb = new Bomb
             {
                 GameId = GameEventService.GetGameId(user.RegionId),
@@ -102,7 +111,8 @@ namespace IFT604Projet.Controllers
                 Latitude = lattitude.Value,
                 Longitude = longitude.Value
             };
-            bomb.IsDefused = true;
+            bomb.IsDefused = false;
+            m_db.Bombs.Add(bomb);
             m_db.SaveChanges();
 
             return Json(new PlantConfirmationViewModel
