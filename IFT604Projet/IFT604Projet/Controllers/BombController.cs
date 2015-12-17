@@ -61,10 +61,11 @@ namespace IFT604Projet.Controllers
             if (!bombId.HasValue || string.IsNullOrWhiteSpace(username))
                 return Json(new DefuseConfirmationViewModel { BombId = -1, Defused = false }, JsonRequestBehavior.AllowGet);
 
-            var bomb = m_db.Bombs.Include(b => b.PlantedForGame).FirstOrDefault(b => b.Id == bombId.Value);
+            var bomb = m_db.Bombs.Find(bombId.Value);
             var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            var evt = m_db.GameEvents.Find(bomb.GameId);
 
-            if (bomb == null || user == null || bomb.IsDefused || bomb.PlantedForGame.State != GameEventState.Defusing)
+            if (bomb == null || user == null || evt == null || bomb.IsDefused || bomb.PlantedForGame.State != GameEventState.Defusing)
                 return Json(new DefuseConfirmationViewModel { BombId = bombId.Value, Defused = false }, JsonRequestBehavior.AllowGet);
 
             bomb.IsDefused = true;
@@ -111,7 +112,7 @@ namespace IFT604Projet.Controllers
                 Latitude = lattitude.Value,
                 Longitude = longitude.Value
             };
-            bomb.IsDefused = false;
+
             m_db.Bombs.Add(bomb);
             m_db.SaveChanges();
 
