@@ -11,6 +11,19 @@
 
 <h2>Rankings of all players</h2>
 
+@*<div class="form-group">
+    @Html.Label("Region", new
+{
+    @class = "col-md-2 control-label"
+})
+    <div class="col-md-10">
+        @Html.DropDownList("RegionId", ViewBag.RegionId as SelectList, String.Empty, new
+   {
+       @class = "form-control"
+   })
+    </div>
+</div>*@
+
 <table class="table">
     <tr>
         <th>
@@ -33,5 +46,4 @@
             </td>
         </tr>
     }
-
 </table>

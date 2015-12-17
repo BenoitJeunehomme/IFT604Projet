@@ -82,7 +82,7 @@ namespace IFT604Projet.Controllers
                 Email = user.Email,
                 Password = user.PasswordHash,
                 Username = user.UserName,
-                //TODO Add region
+                RegionId = user.Region.Name,
                 Score = user.Score
             }, JsonRequestBehavior.AllowGet);
         }
