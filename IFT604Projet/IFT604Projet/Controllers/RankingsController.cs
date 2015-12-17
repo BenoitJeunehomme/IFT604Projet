@@ -29,8 +29,27 @@ namespace IFT604Projet.Controllers
 
         public ActionResult List(string username)
         {
+
+            if (string.IsNullOrWhiteSpace(username))
+                return Json(new RankingViewModel
+                {
+                    RegionId = -1,
+                    Score = 0,
+                    Name = ""
+                }, JsonRequestBehavior.AllowGet);
+
             var db = new ApplicationDbContext();
-            var rankings = from u in db.Users
+
+            var user = db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            if(user == null)
+                return Json(new RankingViewModel
+                {
+                    RegionId = -1,
+                    Score = 0,
+                    Name = ""
+                }, JsonRequestBehavior.AllowGet);
+
+            var rankings = from u in db.Users.Where(u => u.RegionId == user.RegionId)
                            orderby u.Score descending
                            select new RankingViewModel
                            {
@@ -41,7 +60,7 @@ namespace IFT604Projet.Controllers
 
             // ViewBag.RegionId = new SelectList(db.Regions.ToList(), "Id", "Name");
 
-            return Json(rankings,JsonRequestBehavior.AllowGet);
+            return Json(rankings, JsonRequestBehavior.AllowGet);
         }
     }
 }
