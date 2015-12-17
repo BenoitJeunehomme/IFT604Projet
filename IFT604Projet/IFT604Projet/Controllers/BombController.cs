@@ -20,7 +20,7 @@ namespace IFT604Projet.Controllers
             double minDist = double.MaxValue;
             int bombId = -1;
 
-            if (!lattitude.HasValue || !longitude.HasValue || !string.IsNullOrWhiteSpace(username))
+            if (!lattitude.HasValue || !longitude.HasValue || string.IsNullOrWhiteSpace(username))
                 return Json(new ClosestBombDistanceViewModel()
                 {
                     Distance = minDist,
@@ -57,7 +57,8 @@ namespace IFT604Projet.Controllers
         [AllowAnonymous]
         public ActionResult Defuse(int? bombId, string username)
         {
-            if (!bombId.HasValue || string.IsNullOrWhiteSpace(username)) return Json(new DefuseConfirmationViewModel { BombId = -1, Defused = false }, JsonRequestBehavior.AllowGet);
+            if (!bombId.HasValue || string.IsNullOrWhiteSpace(username))
+                return Json(new DefuseConfirmationViewModel { BombId = -1, Defused = false }, JsonRequestBehavior.AllowGet);
 
             var bomb = m_db.Bombs.Include(b => b.PlantedForGame).FirstOrDefault(b => b.Id == bombId.Value);
             var user = m_db.Users.FirstOrDefault(u => u.UserName.Equals(username));
@@ -76,7 +77,7 @@ namespace IFT604Projet.Controllers
         [AllowAnonymous]
         public ActionResult Plant(double? lattitude, double? longitude, string username)
         {
-            if (!lattitude.HasValue || !longitude.HasValue || !string.IsNullOrWhiteSpace(username))
+            if (!lattitude.HasValue || !longitude.HasValue || string.IsNullOrWhiteSpace(username))
                 return Json(new PlantConfirmationViewModel
                 {
                     Lattitude = -1,
