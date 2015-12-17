@@ -144,4 +144,14 @@ namespace IFT604Projet.ViewModels
         public int Score { get; set; }
         public int RegionId { get; set; }
     }
+
+    public class MRegisterViewModel
+    {
+        public bool Result { get; set; }
+    }
+
+    public class MLoginViewModel
+    {
+        public bool Result { get; set; }
+    }
 }
